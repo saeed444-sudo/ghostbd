@@ -16,7 +16,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
       "INSERT INTO images (name, data, mimetype) VALUES ($1, $2, $3)",
       [originalname, buffer, mimetype]
     );
-    res.send("oops sorry, we think our server is getting in some trouble!😅");
+    res.send("oops sorry, your photo is not on supportable format😓\nplease use other one!");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error storing image");
