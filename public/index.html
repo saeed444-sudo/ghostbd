@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindCopy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+    }
+    h1 { margin-bottom: 30px; }
+    input[type="file"] {
+      margin: 20px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      color: black;
+    }
+    button {
+      padding: 10px 20px;
+      background: #00c853;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+    #msg {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Let's check your luck</h1>
+<h2>Upload an image of your face and find your copy from entire world</h2>
+  <form id="uploadForm">
+    <input type="file" name="image" accept="image/*" required />
+    <br />
+    <button type="submit">Upload</button>
+  </form>
+  <p id="msg"></p>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    const msg = document.getElementById("msg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const res = await fetch("/upload", { method: "POST", body: formData });
+      msg.textContent = await res.text();
+    });
+  </script>
+</body>
+</html>
